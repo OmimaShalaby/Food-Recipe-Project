@@ -47,14 +47,6 @@ app.use("/favorites", favoriteRoutes);
 //     res.json(result);
 // });
 
-
-
 app.use(globalHandle);
 
-app.listen(3000, () => console.log(`Server is running on port ${process.env.PORT}`));
-
-/**
- * mongodb+srv://Food-recipe-project:e11jf0F8qjdtTwQw@cluster0.gulckdc.mongodb.net/
- * Food recipe project
- * e11jf0F8qjdtTwQw
- */
+app.listen(3000, () => console.log(`Server is running on port 3000`));

@@ -15,7 +15,7 @@ export const validationMiddleware = (schema) => {
             };
         };
         
-        if(validationErrors.length) next(new classError(`${validationErrors}`, 400))
+        if(validationErrors.length) return next(new classError(`${validationErrors}`, 400))
         next();   // Continue to the next middleware/route handler
     };
 };
