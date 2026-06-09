@@ -56,8 +56,8 @@ export const forgetPassword = async(req, res, next)=>{
         if(!user) return next(new classError("There is no user with this email", 404));
         // generate otp
         const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-        const salt = await bcrypt.genSaltSync(8);
-        user.otp = await bcrypt.hashSync(generatedOTP, salt);
+        const salt = bcrypt.genSaltSync(8);
+        user.otp = bcrypt.hashSync(generatedOTP, salt);
         user.otpExpireAt = Date.now() + 10 * 60 * 1000;
         user.isOtpVerified = false;
         await user.save();
@@ -72,7 +72,6 @@ export const forgetPassword = async(req, res, next)=>{
         console.log(user.email);
         console.log(process.env.EMAIL);
         console.log(process.env.PASSWORD);
-        
         const info = await transporter.sendMail({
                 from:`"Food recipe App" <${process.env.EMAIL}>`,
                 to: user.email,
