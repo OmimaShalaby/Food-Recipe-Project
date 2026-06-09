@@ -19,9 +19,7 @@ const router = Router();
 // add user
 router.post(
     "/add", 
-    isExist, 
-    auth(),
-    isAuthorized(roles.USER_ADMIN_SUPER_ADMIN),
+    isExist,
     validationMiddleware(addUserSchema), 
     errorHandling(addUser)
     );

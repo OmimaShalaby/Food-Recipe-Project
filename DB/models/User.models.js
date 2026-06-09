@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     role: {
         type: String,
@@ -28,7 +29,6 @@ const UserSchema = new mongoose.Schema({
         enum: ["Active", "InActive"],
         default: "InActive"
     },
-    image: String,
     otp: String,
     otpExpireAt: Date,
     isOtpVerified: {

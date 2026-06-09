@@ -24,7 +24,7 @@ await connectionDB();
 
 app.use("/uploads", express.static("Utils/Uploads"));
 
-// seedAdmin
+// create super-admin
 seedAdmin();
 
 app.use("/users", userRoutes);

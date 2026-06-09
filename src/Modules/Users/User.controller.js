@@ -10,19 +10,16 @@ import Category from "../../../DB/models/Category.models.js";
 // ============================================= add new user ==========================================
 export const addUser = async(req, res, next)=>{
         // destruct body
-        let { name, email, password, role, status, image}= req.body;
-        // save image URL
-        if (req.file) image = `${req.protocol}://${req.get("host")}/Uploads/Recipes/${req.file.filename}`;
+        let { name, email, password, role, status}= req.body;
         // hashPassword
-        const hashedPassword = bcrypt.hashSync(password, process.env.SALT_ROUNDS);
+        const hashedPassword = bcrypt.hashSync(password, Number(process.env.SALT_ROUNDS));
         // user instance
         const user = new User({
                 name,
                 email,
                 password: hashedPassword,
                 role,
-                status,
-                image
+                status
                 });
         // save user
         await user.save();
@@ -37,7 +34,7 @@ export const signInUser = async(req, res, next)=>{
         // destruct body
         const {email, password} = req.body;
         // check if user exist
-        const user = await User.findOne({email});
+        const user = await User.findOne({email}).select("+password");
         // return user
         if(!user) return next(new classError("User not found", 404))
         // check password
