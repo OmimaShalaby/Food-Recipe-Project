@@ -23,6 +23,7 @@ export const addUser = async(req, res, next)=>{
                 });
         // save user
         await user.save();
+        
         return res.status(201).json({
                 msg:"User added successfully",
                 user
