@@ -37,6 +37,7 @@ router.post("/reset-password",  validationMiddleware(resetPasswordSchema), error
 router.get("/getAll", auth(), isAuthorized(roles.ADMIN_SUPER_ADMIN), errorHandling(getAllUsers));
 // update user
 router.put("/update", auth(), isAuthorized(roles.USER_ADMIN_SUPER_ADMIN), validationMiddleware(updateUserSchema),errorHandling(updateUser));
+// delete user
 router.delete("/delete", auth(), isAuthorized(roles.USER_ADMIN_SUPER_ADMIN), errorHandling(deleteUser));
 
 // dashboard

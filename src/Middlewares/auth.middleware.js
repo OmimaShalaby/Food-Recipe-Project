@@ -15,7 +15,7 @@ export const auth = ()=>{
         // remove ozo==
         const originalToken = token.split("ozo==")[1];
         // check if token is valid
-        const decoded = jwt.verify(originalToken, "generateTokenSecret");
+        const decoded = jwt.verify(originalToken, process.env.JWT_SECRET);
         if (!decoded.email || !decoded.userId) {
             return next(new classError("Invalid payLoad", 400));
         };
