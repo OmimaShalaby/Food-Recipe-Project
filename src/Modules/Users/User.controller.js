@@ -23,7 +23,7 @@ export const addUser = async(req, res, next)=>{
                 });
         // save user
         await user.save();
-        
+
         return res.status(201).json({
                 msg:"User added successfully",
                 user
@@ -69,6 +69,10 @@ export const forgetPassword = async(req, res, next)=>{
                         pass: process.env.PASSWORD
                 }
         });
+        console.log(user.email);
+        console.log(process.env.EMAIL);
+        console.log(process.env.PASSWORD);
+        
         const info = await transporter.sendMail({
                 from:`"Food recipe App" <${process.env.EMAIL}>`,
                 to: user.email,
