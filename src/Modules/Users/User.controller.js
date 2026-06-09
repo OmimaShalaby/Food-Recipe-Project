@@ -49,6 +49,7 @@ export const signInUser = async(req, res, next)=>{
 
 // ============================================== forget password =======================================
 export const forgetPassword = async(req, res, next)=>{
+        console.log("forgetPassword hit");
         // destruct body
         const {email} = req.body;
         // check if user exist

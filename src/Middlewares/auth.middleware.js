@@ -5,7 +5,8 @@ import User from "../../DB/models/User.models.js";
 
 export const auth = ()=>{
     return async (req, res, next) => {
-        const {token} = req.headers;
+        try {
+            const {token} = req.headers;
         // check if token exist
         if (!token) {
             return next(new classError("Please login first", 404));
@@ -33,5 +34,8 @@ export const auth = ()=>{
         }
         req.user = user;
         next();
+        }catch (error) {
+            return next (new classError("Invalid or expired token", 401))
+        }
     };
 };
