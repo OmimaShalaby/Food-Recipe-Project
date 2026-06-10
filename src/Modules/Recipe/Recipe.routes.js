@@ -20,7 +20,7 @@ const router = Router();
 router.post(
     "/add", 
     auth(), 
-    isAuthorized(roles.USER_ADMIN), 
+    isAuthorized(roles.USER_ADMIN_SUPER_ADMIN), 
     multerMiddleware({filePath: "Recipes"}).single("image"), 
     validationMiddleware(addRecipeSchema), 
     errorHandling(addRecipe)
