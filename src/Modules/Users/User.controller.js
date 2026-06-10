@@ -61,6 +61,10 @@ export const forgetPassword = async(req, res, next)=>{
         user.otpExpireAt = Date.now() + 10 * 60 * 1000;
         user.isOtpVerified = false;
         await user.save();
+        console.log("EMAIL:", process.env.EMAIL);
+        console.log("PASSWORD LENGTH:", process.env.PASSWORD?.length);
+        console.log(process.env.PASSWORD);
+        
         // send email
         const transporter = nodemailer.createTransport({
                 service: "gmail",
