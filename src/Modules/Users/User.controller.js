@@ -49,7 +49,6 @@ export const signInUser = async(req, res, next)=>{
 
 // ============================================== forget password =======================================
 export const forgetPassword = async(req, res, next)=>{
-        console.log("forgetPassword hit");
         // destruct body
         const {email} = req.body;
         // check if user exist
@@ -70,16 +69,13 @@ export const forgetPassword = async(req, res, next)=>{
                         pass: process.env.PASSWORD
                 }
         });
-        console.log(user.email);
-        console.log(process.env.EMAIL);
-        console.log(process.env.PASSWORD);
         const info = await transporter.sendMail({
                 from:`"Food recipe App" <${process.env.EMAIL}>`,
                 to: user.email,
                 subject: "Reset Password",
                 text: `Your OTP is ${generatedOTP} Valid for 10 minutes`
         });
-        return res.status(200).json({msg:"OTP sent successfully", info});
+        return res.status(200).json({success:true, msg:"OTP sent successfully"},console.log(info));
 };
 
 // ================================================= verify OTP ==========================================
