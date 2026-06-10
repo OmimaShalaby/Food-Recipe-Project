@@ -1,4 +1,5 @@
 import Favorite from "../../../DB/models/Favorite.models.js";
+import Recipe from "../../../DB/models/Recipe.models.js";
 import { classError } from "../../../Utils/ClassError.utils.js";
 
 
@@ -8,6 +9,9 @@ export const addFavorite = async(req, res, next)=>{
         const userId = req.user._id;
         // get recipe id
         const {recipeId} = req.body;
+        // check if recipe exist
+        const recipe = await Recipe.findById({recipeId});
+        if(!recipe) return next(new classError("Recipe not found", 404))
         // Favorite instance        
         const addFavorite = new Favorite({ 
                 userId, 
