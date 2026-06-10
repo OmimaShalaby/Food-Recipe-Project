@@ -7,7 +7,7 @@ export const addFavorite = async(req, res, next)=>{
         // get user id
         const userId = req.user._id;
         // get recipe id
-        const {recipeId} = req.params.id;
+        const {recipeId} = req.body.id;
         // Favorite instance        
         const addFavorite = new Favorite({ 
                 userId, 
