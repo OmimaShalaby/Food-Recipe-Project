@@ -9,16 +9,18 @@ export const addFavorite = async(req, res, next)=>{
         const userId = req.user._id;
         // get recipe id
         const {recipeId} = req.body;
+        if(!userId || !recipeId) return next(new classError("Please provide userId and recipeId", 400));
         // check if recipe exist
-        const recipe = await Recipe.findById({recipeId});
-        if(!recipe) return next(new classError("Recipe not found", 404))
+        const recipe = await Recipe.findById(recipeId);
+        if(!recipe) return next(new classError("Recipe not found, please provide valid recipeId", 404))
+        // check if favorite already exist
+        const favorite = await Favorite.findOne({userId, recipeId});
+        if(favorite) return next(new classError("Favorite already exist", 400))
         // Favorite instance        
         const addFavorite = new Favorite({ 
                 userId, 
                 recipeId
                 });
-        // check if Favorite exist
-        if(!userId || !recipeId) return next(new classError("Please provide userId and recipeId", 400))
         await addFavorite.save();
         return res.status(201).json({msg:"Favorite added successfully", addFavorite});
 };
