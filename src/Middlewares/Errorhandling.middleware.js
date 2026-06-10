@@ -16,7 +16,7 @@ export const errorHandling = (api)=>{
             next(
                 new classError(
                     err.message || "Something went wrong",
-                    err.statusCode || 500,
+                    err.cause || 500,
                     err.stack
                 )
             )
@@ -26,7 +26,7 @@ export const errorHandling = (api)=>{
 
 export const globalHandle = (err, req, res, next)=>{
     if (err){
-        return res.status(err["statusCode"] || 500).json({
+        return res.status(err["cause"] || 500).json({
             message: err.message,
             statusCode: err.cause,
             stack: err.stack
