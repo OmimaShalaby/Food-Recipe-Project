@@ -4,7 +4,7 @@ import { generalRules } from "../../../Utils/generalRules.utils.js";
 export const addRecipeSchema = {
     body : Joi.object({
         title: Joi.string().min(3).max(10).alphanum().trim().required(),
-        description: Joi.string().min(3).max(10).alphanum().trim().required(),
+        description: Joi.string().min(3).max(10).trim().required(),
         price: Joi.number().min(3).max(100000000000000000000).required(),
         categoryId: generalRules.objectId,
     })
