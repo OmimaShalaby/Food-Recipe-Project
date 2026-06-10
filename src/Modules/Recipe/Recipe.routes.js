@@ -33,7 +33,7 @@ router.get("/getOne/:id", errorHandling(getRecipeById));
 router.put(
     "/update/:id", 
     auth(), 
-    isAuthorized(roles.USER_ADMIN), 
+    isAuthorized(roles.USER_ADMIN_SUPER_ADMIN), 
     multerMiddleware({filePath:"Recipes"}).single("image"), 
     validationMiddleware(updateRecipeSchema), 
     errorHandling(updateRecipe)
@@ -42,7 +42,7 @@ router.put(
 router.delete(
     "/delete/:id", 
     auth(), 
-    isAuthorized(roles.USER_ADMIN), 
+    isAuthorized(roles.USER_ADMIN_SUPER_ADMIN), 
     errorHandling(deleteRecipe)
     );
 
